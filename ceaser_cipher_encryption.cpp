@@ -1,3 +1,4 @@
+// Online C++ compiler to run C++ program online
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
@@ -7,10 +8,12 @@ string user_input()
     string plain_text;
     cout << "Enter Text : ";
     getline(cin, plain_text);
+    // cout << plain_text << endl;
     int l = plain_text.length();
     int c = count(plain_text.begin(), plain_text.end(), ' ');
     remove(plain_text.begin(), plain_text.end(), ' ');
     plain_text.resize(l-c);
+    // cout << plain_text << endl;
     return plain_text;
 }
 
@@ -29,11 +32,23 @@ string encryption(string text)
     int count = 0;
     for(int i = 0; i < text.length(); i++)
     {
-        val = (int(text[i]) + 3) % 126;
-        if(val > 90)
+        if(text[i] >= 'a' and text[i] <= 'z')
         {
-            val = 65 + count;
-            count++;
+            val = (int(text[i]) + 3) % 126;
+            if(val > 122)
+            {
+                val = 97 + count;
+                count++;
+            }
+        }
+        else
+        {
+            val = (int(text[i]) + 3) % 126;
+            if(val > 90)
+            {
+                val = 65 + count;
+                count++;
+            }
         }
         cipher_text += char(val);
     }
