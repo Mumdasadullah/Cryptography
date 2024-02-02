@@ -7,12 +7,10 @@ string user_input()
     string plain_text;
     cout << "Enter Text : ";
     getline(cin, plain_text);
-    // cout << plain_text << endl;
     int l = plain_text.length();
     int c = count(plain_text.begin(), plain_text.end(), ' ');
     remove(plain_text.begin(), plain_text.end(), ' ');
     plain_text.resize(l-c);
-    // cout << plain_text << endl;
     return plain_text;
 }
 
