@@ -32,7 +32,7 @@ string encryption(string text)
     int count = 0;
     for(int i = 0; i < text.length(); i++)
     {
-        if(text[i] >= 'a' and text[i] <= 'z')
+        if(text[i] >= 'a' && text[i] <= 'z')
         {
             val = (int(text[i]) + 3) % 126;
             if(val > 122)
