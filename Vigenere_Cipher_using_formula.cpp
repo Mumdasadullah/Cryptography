@@ -57,7 +57,10 @@ void encryption(string input, string key)
         ki = int(arr[1][m]) % 26;
         Ei = (pi + ki) % 26;
         cout << Ei << " ";
+        cipher_text += char(Ei + 65);
     }
+    cout << endl;
+    cout << cipher_text;
 }
 
 int main() {
