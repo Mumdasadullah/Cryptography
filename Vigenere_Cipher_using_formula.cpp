@@ -23,11 +23,10 @@ string user_keyword_input()
     return keyword;
 }
 
-void encryption(string input, string key)
+string encryption(string input, string key)
 {
     char arr[2][input.length()];
     int j = 0;
-    int pi, ki, Ei;
     string cipher_text;
     for(int i=0; i<input.length(); i++)
     {
@@ -42,32 +41,20 @@ void encryption(string input, string key)
         j++;
     }
     
-    for(int l=0; l<2; l++)
-    {
-        for(int m=0;m<input.length();m++)
-        {
-            cout << arr[l][m] << "  ";
-        }
-        cout << endl;
-    }
-    
     for(int m=0; m<input.length(); m++)
     {
-        pi = int(arr[0][m]) % 26;
-        ki = int(arr[1][m]) % 26;
-        Ei = (pi + ki) % 26;
-        cout << Ei << " ";
-        cipher_text += char(Ei + 65);
+        cipher_text += char((((int(arr[0][m])%26) + (int(arr[1][m])%26))%26) + 65);
     }
-    cout << endl;
-    cout << cipher_text;
+    return cipher_text;
 }
 
 int main() {
     // Write C++ code here
     string text = user_plain_text_input();
     string shift_key = user_keyword_input();
-    encryption(text,shift_key);
+    string output = encryption(text,shift_key);
+    cout << endl;\
+    cout << "Cipher Text is : " << output << endl;
     
     return 0;
 }
