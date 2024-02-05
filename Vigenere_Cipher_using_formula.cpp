@@ -38,12 +38,8 @@ string encryption(string input, string key)
             continue;
         }
         arr[1][i] = key[j];
+        cipher_text += char((((int(arr[0][i])%26) + (int(arr[1][i])%26))%26) + 65);
         j++;
-    }
-    
-    for(int m=0; m<input.length(); m++)
-    {
-        cipher_text += char((((int(arr[0][m])%26) + (int(arr[1][m])%26))%26) + 65);
     }
     return cipher_text;
 }
