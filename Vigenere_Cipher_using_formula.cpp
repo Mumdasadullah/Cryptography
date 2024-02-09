@@ -23,25 +23,12 @@ string user_keyword_input()
     return keyword;
 }
 
-string encryption(string input, string key)
+string encryption(string input, string key, char alpha[][26])
 {
-    char alpha[2][26];
     char arr[2][input.length()];
     int num[3][input.length()];
     int j = 0;
     string cipher_text;
-    
-    
-    for(int i=0; i<2; i++)
-    {
-        for(int j=0; j<26; j++)
-        {
-            if(i == 0)
-                alpha[i][j] = char(j+97);
-            else
-                alpha[i][j] = char(j+65);
-        }
-    }
     
     for(int i=0; i<input.length(); i++)
     {
@@ -71,12 +58,74 @@ string encryption(string input, string key)
     return cipher_text;
 }
 
+string decryption(string input, string key, char alpha[][26])
+{
+    char arr[2][input.length()];
+    int num[3][input.length()];
+    int j = 0;
+    string cipher_text;
+    
+    for(int i=0; i<input.length(); i++)
+    {
+        arr[0][i] = input[i];
+        arr[1][i] = key[j];
+        j++;
+        if(j == 6)
+        {
+            j = 0;
+        }
+        for(int j=0;j<26; j++)
+        {
+            if(arr[0][i] == alpha[1][j])
+            {
+                if(arr[0][i] == arr[1][i])
+                    num[1][i] = j;
+                num[0][i] = j;
+            }
+            else if(arr[1][i] == alpha[1][j])
+            {
+                num[1][i] = j;
+            }
+        }
+        num[2][i] = (num[0][i] - num[1][i] + 26) % 26;
+        cipher_text += alpha[1][num[2][i]];
+    }
+    
+    for(int m=0; m<3; m++)
+    {
+        for(int n=0; n<input.length(); n++)
+        {
+            cout << num[m][n] << "  ";
+        }
+        cout << endl;
+    }
+    return cipher_text;
+}
+
 int main() {
     // Write C++ code here
     string text = user_plain_text_input();
     string shift_key = user_keyword_input();
-    string output = encryption(text,shift_key);
-    cout << endl;\
+    
+    char alpha[2][26];
+    for(int i=0; i<2; i++)
+    {
+        for(int j=0; j<26; j++)
+        {
+            if(i == 0)
+                alpha[i][j] = char(j+97);
+            else
+                alpha[i][j] = char(j+65);
+        }
+    }
+    
+    // encryption(text,shift_key);
+    // string output = encryption(text,shift_key,alpha);
+    // cout << endl;
+    // cout << "Cipher Text is : " << output << endl;
+    
+    string output = decryption(text,shift_key,alpha);
+    cout << endl;
     cout << "Cipher Text is : " << output << endl;
     
     return 0;
