@@ -26,6 +26,10 @@ string user_keyword_input()
 string encryption(string input, string key)
 {
     char alpha[2][26];
+    char arr[2][input.length()];
+    int num[3][input.length()];
+    int j = 0;
+    string cipher_text;
     
     
     for(int i=0; i<2; i++)
@@ -39,26 +43,15 @@ string encryption(string input, string key)
         }
     }
     
-    char arr[2][input.length()];
-    int j = 0;
-    string cipher_text;
     for(int i=0; i<input.length(); i++)
     {
         arr[0][i] = input[i];
-        if(key[j] == key[key.length()-1])
-        {
-            arr[1][i] = key[j];
-            j = 0;
-            continue;
-        }
         arr[1][i] = key[j];
-        // cipher_text += char((((int(arr[0][i])%26) + (int(arr[1][i])%26))%26) + 65);
         j++;
-    }
-    
-    int num[3][input.length()];
-    for(int i=0; i<input.length(); i++)
-    {
+        if(j == 6)
+        {
+            j = 0;
+        }
         for(int j=0;j<26; j++)
         {
             if(arr[0][i] == alpha[1][j])
@@ -82,7 +75,6 @@ int main() {
     // Write C++ code here
     string text = user_plain_text_input();
     string shift_key = user_keyword_input();
-    // encryption(text,shift_key);
     string output = encryption(text,shift_key);
     cout << endl;\
     cout << "Cipher Text is : " << output << endl;
