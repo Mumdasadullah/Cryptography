@@ -90,22 +90,15 @@ string decryption(string input, string key, char alpha[][26])
         num[2][i] = (num[0][i] - num[1][i] + 26) % 26;
         cipher_text += alpha[1][num[2][i]];
     }
-    
-    for(int m=0; m<3; m++)
-    {
-        for(int n=0; n<input.length(); n++)
-        {
-            cout << num[m][n] << "  ";
-        }
-        cout << endl;
-    }
     return cipher_text;
 }
 
 int main() {
     // Write C++ code here
+    string output;
     string text = user_plain_text_input();
     string shift_key = user_keyword_input();
+    int n;
     
     char alpha[2][26];
     for(int i=0; i<2; i++)
@@ -119,14 +112,19 @@ int main() {
         }
     }
     
-    // encryption(text,shift_key);
-    // string output = encryption(text,shift_key,alpha);
-    // cout << endl;
-    // cout << "Cipher Text is : " << output << endl;
+    cout << "Encryption(1) or Decryption(2) : ";
+    cin >> n;
+    if (n == 1)
+    {
+        output = encryption(text,shift_key,alpha);
+    }
+    else
+    {
+        output = decryption(text,shift_key,alpha);
+    }
     
-    string output = decryption(text,shift_key,alpha);
     cout << endl;
-    cout << "Cipher Text is : " << output << endl;
+    cout << "Output is : " << output << endl;
     
     return 0;
 }
