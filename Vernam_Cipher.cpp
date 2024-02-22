@@ -47,10 +47,51 @@ string encryption(string input, string key, char alpha[])
                 arr[1][i] = j;
             }
         }
-        arr[2][i] = arr[0][i] ^ arr[1][i];
+        arr[2][i] = arr[0][i] + arr[1][i];
         if(arr[2][i] >= 26)
         {
             arr[2][i] = arr[2][i] - 26;
+        }
+        cipher_text += alpha[arr[2][i]];
+    }
+    
+    for(int i=0; i<3; i++)
+    {
+        for(int j=0; j<input.length(); j++)
+        {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+    
+    return cipher_text;
+}
+
+string decryption(string input, string key, char alpha[26])
+{
+    string cipher_text;
+    int arr[3][input.length()];
+    for(int i=0; i<input.length(); i++)
+    {
+        for(int j=0; j<26; j++)
+        {
+            if(input[i] == alpha[j])
+            {
+                arr[0][i] = j;
+                if(input[i] == key[i])
+                {
+                    arr[1][i] = j;
+                }
+            }
+            else if(key[i] == alpha[j])
+            {
+                arr[1][i] = j;
+            }
+        }
+        arr[2][i] = arr[0][i] - arr[1][i];
+        if(arr[2][i] < 0)
+        {
+            arr[2][i] = arr[2][i] + 26;
         }
         cipher_text += alpha[arr[2][i]];
     }
@@ -93,7 +134,14 @@ int main() {
         cout << endl;
     }
     
-    output = encryption(text, shift_key, alpha);
+    int n;
+    cout << "Encryption(1) or Decryption(2) : ";
+    cin >> n;
+    if(n==1)
+        output = encryption(text,shift_key,alpha);
+    else
+        output = decryption(text,shift_key,alpha);
+
     cout << "Cipher Text is : " << output << endl;
     return 0;
 }
