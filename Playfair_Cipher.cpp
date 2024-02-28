@@ -4,6 +4,23 @@ def user_input():
     text = text.replace(" ","")
     return text,keys
 
+def pair_text(text):
+    pair = []
+    p = []
+    for i in range (0, len(text) , 2):
+        p.append(text[i])
+        if text[i] == text[i+1]:
+            p.append('x')
+        else:
+            if i == len(text) and len(p) == 1:
+                p.append('Z')
+            else:
+                p.append(text[i+1])
+        pair.append(p)
+        p = []
+    
+    print(pair)
+
 def table(key):
     tab = []
     val = []
@@ -19,11 +36,6 @@ def table(key):
             tab.append(val)
             val = []
         val.append(key[i])
-    # for i in range (len(key)):
-    #     if i==5:
-    #         tab.append(val)
-    #         val = []
-    #     val.append(key[i])
     if len(val) > 0 and len(val) < 5:
         for i in lst:
             val.append(i)
@@ -36,4 +48,5 @@ if __name__ == '__main__':
     plain_text,key = user_input()
     # key = str(input("Enter Key : "))
     mat = table(key)
-    print(mat)
+    pair_text(plain_text)
+    # print(mat)
