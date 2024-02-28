@@ -9,13 +9,13 @@ def pair_text(text):
     p = []
     for i in range (0, len(text) , 2):
         p.append(text[i])
-        if text[i] == text[i+1]:
-            p.append('x')
-        else:
-            if i == len(text) and len(p) == 1:
-                p.append('Z')
+        if i < len(text)-1:
+            if text[i] == text[i+1]:
+                p.append('x')
             else:
                 p.append(text[i+1])
+        else:
+            p.append('Z')
         pair.append(p)
         p = []
     
