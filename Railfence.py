@@ -12,12 +12,12 @@ def user_input():
         print("Something went Wrong")
 
 def tab(text_len, key):
-    table = [['-']*text_len]*key
+    table = [['-' for i in range(text_len)] for j in range(key)]
     return table
     
 def display_table(tabl):
-    for i in range(20):
-        for j in range(3):
+    for i in range(3):
+        for j in range(20):
             print(tabl[i][j], end=" ")
         print()
 
@@ -25,23 +25,23 @@ def encryption(table, text, length, key):
     i = 0
     j = 0
     while(i < length):
-        while(j < key):
-            print(f"j < key loop running and i is {i} nad j is {j}")
+        if j == 3:
+            j = 1
             table[j][i] = text[i]
-            j+=1
-            i+=1
-        # print(j)
-        j-=2
-        while(j > -1):
-            print(f"j > 0 loop running and i is {i} nad j is {j}")
-            table[j][i] = text[i]
-            j-=1
-            i+=1
-        j+=2
-        # print(f"j is {j}")
-        # i+=1
-    # display_table(table)
-    print(table)
+            j = 0
+            if i != length - 1:
+                i+=1
+            else:
+                break
+        table[j][i] = text[i]
+        j+=1
+        i+=1
+    
+    for i in range(3):
+        for j in range(20):
+            if table[i][j] == '-':
+                continue
+            print(table[i][j], end="")
     
 if __name__ == '__main__':
     text,length,shift_key = user_input()
