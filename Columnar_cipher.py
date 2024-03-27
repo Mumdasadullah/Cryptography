@@ -2,7 +2,7 @@
 # Write Python 3 code in this online editor and run it.
 def user_input():
     # plain_text = str(input("Enter Plain Text : "))
-    plain_text = "e  kefGsGsrekoe"
+    plain_text = "e--kefGsGsrekoe"
     # key = str(input("Enter Key : "))
     key = "HACK"
     return plain_text,key
@@ -81,7 +81,7 @@ def create_table_dec(text, key):
                 continue
             table[j][ind] = text[i]
             i+=1
-    print(table)
+    return table
     # print(table)
     # res = []
     # order = []
@@ -135,6 +135,13 @@ def encryption(table):
     
 def decryption(table):
     plain_text = ""
+    for i in range(2,len(table)):
+        for j in range(len(table[0])):
+            if table[i][j] == '-':
+                plain_text += " "
+                continue
+            plain_text += table[i][j]
+    print(plain_text)
     
     
 if __name__ == "__main__":
@@ -142,3 +149,4 @@ if __name__ == "__main__":
     print(f'the text is {text} and shift key is {shift_key}')
     tab = create_table_dec(text, shift_key)
     # encryption(tab)
+    decryption(tab)
