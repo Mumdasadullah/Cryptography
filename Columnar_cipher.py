@@ -50,9 +50,23 @@ def create_table(text, key):
             res.append('-')
     table.append(res)
     # print(table)
-    display(table, key)
+    # display(table, key)
+    return table
+    
+def encryption(table):
+    cipher_text = ""
+    for i in range(1,5):
+        ind = table[1].index(i)
+        for j in range(2,len(table)):
+            if table[j][ind] == '-':
+                cipher_text += " "
+                continue
+            cipher_text += table[j][ind]
+            
+    print(cipher_text)
     
 if __name__ == "__main__":
     text,shift_key = user_input()
     print(f'the text is {text} and shift key is {shift_key}')
-    create_table(text, shift_key)
+    tab = create_table(text, shift_key)
+    encryption(tab)
